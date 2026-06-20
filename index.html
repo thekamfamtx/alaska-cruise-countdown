@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Alaska Cruise Countdown</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: transparent;
+      font-family: Arial, sans-serif;
+    }
+
+    /* MAIN WIDGET */
+    #countdown-box {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+
+      width: 360px;
+      padding: 18px 20px;
+
+      text-align: center;
+      color: white;
+
+      background: linear-gradient(135deg, #0f4c5c, #1f1f1f);
+      border: 2px solid #2dd4bf;
+      border-radius: 16px;
+
+      box-shadow: 0 0 12px rgba(45, 212, 191, 0.4);
+
+      animation: tealPulse 2.5s infinite ease-in-out;
+
+      position: fixed;
+    }
+
+    /* PULSE EFFECT */
+    @keyframes tealPulse {
+      0% {
+        box-shadow: 0 0 8px rgba(45, 212, 191, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 26px rgba(45, 212, 191, 0.9);
+      }
+      100% {
+        box-shadow: 0 0 8px rgba(45, 212, 191, 0.3);
+      }
+    }
+
+    #title {
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #e5e7eb;
+      margin-bottom: 8px;
+    }
+
+    #timer {
+      font-size: 26px;
+      font-weight: bold;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    #subtext {
+      font-size: 12px;
+      opacity: 0.85;
+      color: #cbd5e1;
+    }
+
+    /* LOGO WATERMARK */
+    #logo {
+      position: absolute;
+      bottom: 10px;
+      right: 12px;
+      width: 42px;
+      height: 42px;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="countdown-box">
+  <div id="title">Alaska Cruise Countdown</div>
+  <div id="timer"></div>
+  <div id="subtext">June 28, 2027</div>
+
+  <!-- LOGO WATERMARK -->
+  <img id="logo" src="kamfam-logo.png" alt="KAM Fam Logo">
+</div>
+
+<script>
+  const targetDate = new Date("June 28, 2027 00:00:00").getTime();
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    if (distance <= 0) {
+      document.getElementById("timer").innerHTML = "🚢 WE ARE SAILING!";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((distance / (1000 * 60)) % 60);
+    const seconds = Math.floor((distance / 1000) % 60);
+
+    document.getElementById("timer").innerHTML =
+      `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
